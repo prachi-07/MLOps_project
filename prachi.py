@@ -1,5 +1,5 @@
 from keras.datasets import mnist
-dataset = mnist.load_data('mymnist.db')
+#dataset = mnist.load_data('mymnist.db')
 
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Flatten
@@ -12,11 +12,12 @@ import numpy as np
 class myCallback(Callback):
       def on_epoch_end(self, epoch, logs={}):
           
-            file='/root/task3/output.txt' 
+            file='data/output.txt' 
             var=logs.get('accuracy')
             with open(file, 'w') as filetowrite:
                 filetowrite.write(np.array2string(var))
 
+callbacks = myCallback()
 (X_train, y_train), (X_test, y_test) = mnist.load_data('mymnist.db')
 
 # building the input vector from the 28x28 pixels
